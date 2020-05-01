@@ -1,21 +1,33 @@
-"""OpenRMS URL Configuration
+from django.urls import include, path
+from rest_framework import routers
+from resturant import views
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path
+router = routers.DefaultRouter()
+router.register(r'branch', views.BranchViewSet)
+router.register(r'table', views.TableViewSet) 
+router.register(r'table-status', views.TableStatusViewSet) 
+router.register(r'customer', views.CustomerViewSet) 
+router.register(r'reservation', views.ReservationViewSet) 
+router.register(r'order', views.OrderViewSet) 
+router.register(r'table-track', views.TableTrackViewSet) 
+router.register(r'tax', views.TaxViewSet) 
+router.register(r'discount', views.DiscountTypeViewSet) 
+router.register(r'bill', views.BillViewSet) 
+router.register(r'menu', views.MenuViewSet) 
+router.register(r'menu-item', views.MenuItemViewSet) 
+router.register(r'deal', views.DealViewSet) 
+router.register(r'deal-item', views.DealItemViewSet) 
+router.register(r'order', views.OrderDetailsViewSet) 
+router.register(r'employee', views.EmployeeViewSet) 
+router.register(r'payroll', views.PayRollViewSet) 
+router.register(r'revenue', views.RevenueViewSet) 
+router.register(r'feedback', views.FeedbackViewSet) 
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    #path('admin/', admin.site.urls),
 ]
+
+

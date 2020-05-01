@@ -8,6 +8,8 @@ class Branch(models.Model):
     address = models.CharField(max_length=200, null=True)
     active = models.BooleanField(default=True)
     phone = models.IntegerField(max_length=10, null=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    latitude  = models.DecimalField(max_digits=9, decimal_places=6, null=True)
 
 class Table(models.Model):
     id = models.AutoField(primary_key=True)
@@ -26,6 +28,8 @@ class Customer(models.Model):
     phone = models.IntegerField(max_length=10, unique=True)
     address = models.CharField(max_length=200)
     password = models.CharField(max_length=10)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    latitude  = models.DecimalField(max_digits=9, decimal_places=6, null=True)
 
 class Reservation(models.Model):
     id = models.AutoField(primary_key=True)
@@ -50,6 +54,7 @@ class Tax(models.Model):
     name = models.CharField(max_length=200)
     amount = models.IntegerField(max_length=2)
     active = models.BooleanField(default=True)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
     order_choices = (('takeAway','Take away'), ('dineIn','Dine in'), ('homeDelivery','Home delivery'))
     order_type = models.CharField(choices=order_choices,max_length=200)
 
@@ -58,6 +63,7 @@ class DiscountType(models.Model):
     name = models.CharField(max_length=200, unique=True)
     amount = models.IntegerField(max_length=2)
     active = models.BooleanField(default=True)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
     order_choices = (('takeAway','Take away'), ('dineIn','Dine in'), ('homeDelivery','Home delivery'))
     order_type = models.CharField(choices=order_choices,max_length=200)
 
@@ -121,6 +127,8 @@ class DeliveryTrack(models.Model):
     deliverd = models.BooleanField(default=True)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     bill_id = models.ForeignKey(Bill, on_delete=models.CASCADE)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    latitude  = models.DecimalField(max_digits=9, decimal_places=6, null=True)
 
 class PayRoll(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
